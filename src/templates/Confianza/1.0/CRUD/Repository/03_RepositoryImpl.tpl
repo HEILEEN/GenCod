@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repository{
 	
 	@Autowired

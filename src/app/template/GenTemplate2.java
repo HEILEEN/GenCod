@@ -67,7 +67,7 @@ public class GenTemplate2 {
 		StringTemplate code = new StringTemplate(plantilla);
 		int i = 0;
 		String object_number;
-		String dTmp = (pOut != null) ? pOut : "C:" + dSeparator + "temp" + dSeparator + AppName + dSeparator;
+		String dTmp = (pOut != null) ? pOut : "C:" + dSeparator + "temp" + dSeparator + AppName.toLowerCase() + dSeparator;
 		String[] keys;
 		String[] keysPk;
 		

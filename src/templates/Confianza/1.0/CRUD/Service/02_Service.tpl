@@ -4,10 +4,12 @@ $comments$
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.confianza.webapp.repository.$AppName$.$Table0.loObjName$.$Table0.objName$;
 import com.confianza.webapp.repository.$AppName$.$Table0.loObjName$.$Table0.objName$Repository;
 
+@Service
 public class $Table0.objName$ServiceImpl implements $Table0.objName$Service{
 	
 	@Autowired
