@@ -1,63 +1,70 @@
 package com.confianza.webapp.controller.$AppName$.$Table0.loObjName$;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
+import com.google.gson.Gson;
 import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
- 
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import com.confianza.webapp.service.$AppName$.$Table0.loObjName$.$Table0.objName$Service;
 import com.confianza.webapp.repository.$AppName$.$Table0.loObjName$.$Table0.ObjName$;
 
 @Controller
+@EnableWebMvc
 @RequestMapping("/$Table0.objName$")
 public class C$Table0.objName$ {
 
 	private $Table0.objName$Service $Table0.loObjName$Service;
 	
 	@Autowired
+	Gson gson;
+	
+	@Autowired
 	public C$Table0.objName$($Table0.objName$Service $Table0.loObjName$Service) {
 		this.$Table0.loObjName$Service = $Table0.loObjName$Service;
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$}.json", method = RequestMethod.GET, produces={"application/json"})
 	@ResponseBody
-	public $Table0.objName$ list(Long id){
+	public String list(@PathVariable("$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$") Long $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$){
 		
-		return this.$Table0.loObjName$Service.list(id);
+		return gson.toJson(this.$Table0.loObjName$Service.list($Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$));
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/listAll.json", method = RequestMethod.GET, produces={"application/json"})
 	@ResponseBody
-	public List<$Table0.objName$> listAll(){
+	public String listAll(){
 	
-		return this.$Table0.loObjName$Service.listAll();
+		return gson.toJson(this.$Table0.loObjName$Service.listAll());
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$}", method = RequestMethod.PUT)
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	public $Table0.objName$ update(Long id){
-		return this.$Table0.loObjName$Service.update(id);
+	public $Table0.objName$ update(@PathVariable("$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$") Long $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$){
+		return this.$Table0.loObjName$Service.update($Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$}.json", method = RequestMethod.DELETE)
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	public void delete(Long id){
-		this.$Table0.loObjName$Service.delete(id);
+	public void delete(@PathVariable("$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$") Long $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$){
+		this.$Table0.loObjName$Service.delete($Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, produces={"application/json"})
 	@ResponseStatus( HttpStatus.CREATED )
 	@ResponseBody
-	public $Table0.objName$ insert(@RequestBody $Table0.objName$ $Table0.loObjName$){
-		return this.$Table0.loObjName$Service.insert($Table0.loObjName$);
+	public String insert(@RequestBody $Table0.objName$ $Table0.loObjName$){
+		return gson.toJson(this.$Table0.loObjName$Service.insert($Table0.loObjName$));
 	}
 }
