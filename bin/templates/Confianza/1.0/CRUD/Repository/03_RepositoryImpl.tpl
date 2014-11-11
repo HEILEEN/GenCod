@@ -111,8 +111,7 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public $Table0.objName$ insert($Table0.objName$ $Table0.loObjName$){
-		//getSession().insert($Table0.loObjName$);
-		return $Table0.loObjName$;
+	public void insert($Table0.objName$ $Table0.loObjName$){
+		getSession().save($Table0.loObjName$);		
 	}
 }

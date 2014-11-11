@@ -14,5 +14,5 @@ public interface $Table0.objName$Repository {
 	
 	public void delete(Long id);
 	
-	public $Table0.objName$ insert($Table0.objName$ $Table0.loObjName$);
+	public void insert($Table0.objName$ $Table0.loObjName$);
 }
