@@ -35,6 +35,11 @@ public class C$Table0.objName$ {
 		this.$Table0.loObjName$Service = $Table0.loObjName$Service;
 	}
 	
+	@RequestMapping("/")
+	public String index(Model model) {
+		return "$AppName$/$Table0.loObjName$/$Table0.objName$";
+	}
+	
 	@RequestMapping(value = "/{$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$}.json", method = RequestMethod.GET, produces={"application/json"})
 	@ResponseBody
 	public String list(@PathVariable("$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$") Long $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$){
