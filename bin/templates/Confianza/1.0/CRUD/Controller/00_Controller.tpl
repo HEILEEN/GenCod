@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.confianza.webapp.service.$AppName$.$Table0.loObjName$.$Table0.objName$Service;
 import com.confianza.webapp.repository.$AppName$.$Table0.loObjName$.$Table0.ObjName$;
+import com.confianza.webapp.repository.framework.frmsesion.FrmSesion;
 
 @Controller
 @EnableWebMvc
