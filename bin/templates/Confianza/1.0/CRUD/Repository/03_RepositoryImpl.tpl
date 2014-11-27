@@ -3,6 +3,7 @@ package com.confianza.webapp.repository.$AppName$.$Table0.loObjName$;
 $comments$
 
 import java.util.List;
+import java.util.Iterator;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -60,13 +61,18 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public List<$Table0.objName$> listAll(){
+	public List<$Table0.objName$> listAll(int init, int limit){
 		try{
 			String sql = "select $Columns0:{ c |$c.loName$};separator=" ,"$ "
 					   + "from $Table0.objName$ ";
 						
 			Query query = getSession().createSQLQuery(sql)
 						 .addEntity($Table0.objName$.class);
+						 
+			if(init==0 && limit!=0){
+				query.setFirstResult(init);			
+				query.setMaxResults(limit);
+			}
 					     
 			return query.list();
 		}catch(Exception e){
@@ -74,6 +80,35 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 			return null;
 		}
 	}	
+	
+	/**
+	 * Metodo de consulta para el conteo de los registros de la tabla $Table0.objName$
+	 * @return int = cantidad de registros encontrados
+	 * @throws Exception
+	 */
+	@Override
+	@Transactional
+	public int getCount(){
+		try{
+			String sql = "select count(*) "
+					   + "from $Table0.objName$ ";
+						
+			Query query = getSession().createQuery(sql);
+	        
+			Iterator it = query.list().iterator();
+	        Long ret = new Long(0);
+	        
+	        if (it != null)
+		        if (it.hasNext()){
+		        	ret = (Long) it.next();
+		        }
+	        
+			return ret.intValue();
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	
 	/**
 	 * Metodo para actualizar los datos de un registro de la tabla $Table0.objName$ por id

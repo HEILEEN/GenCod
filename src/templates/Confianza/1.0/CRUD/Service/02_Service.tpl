@@ -35,9 +35,19 @@ public class $Table0.objName$ServiceImpl implements $Table0.objName$Service{
 	}
 	
 	@Override
-	public List<$Table0.objName$> listAll(){
-		return $Table0.loObjName$Repository.listAll();
+	public List<$Table0.objName$> listAll(int pageSize, int page){
+	
+		int limit=pageSize*page;
+		int init=limit-pageSize;
+		
+		return $Table0.loObjName$Repository.listAll(init, limit);
 	}	
+	
+	@Override
+	public int getCount(){
+				
+		return $Table0.loObjName$Repository.getCount();
+	}
 	
 	@Override
 	public $Table0.objName$ update(Long id){
