@@ -40,7 +40,7 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	@Transactional
 	public $Table0.objName$ list(Long id){
 		try{
-			String sql = "select $Columns0:{ c |$c.loName$};separator=" ,"$ "
+			String sql = "select "+$Table0.objName$.getColumnNames()
 					   + "from $Table0.objName$ "
 					   + "where $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$ = :id ";
 						
@@ -63,7 +63,7 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	@Transactional
 	public List<$Table0.objName$> listAll(int init, int limit){
 		try{
-			String sql = "select $Columns0:{ c |$c.loName$};separator=" ,"$ "
+			String sql = "select "+$Table0.objName$.getColumnNames()
 					   + "from $Table0.objName$ ";
 						
 			Query query = getSession().createSQLQuery(sql)
@@ -118,8 +118,7 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public $Table0.objName$ update(Long id){
-		$Table0.objName$ $Table0.loObjName$ = this.list(id);
+	public $Table0.objName$ update($Table0.objName$ $Table0.loObjName$){
 		getSession().update($Table0.loObjName$);
 		return $Table0.loObjName$;
 	}
@@ -132,10 +131,8 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public void delete(Long id){
-		$Table0.objName$ $Table0.loObjName$ = this.list(id);
-		//$Table0.objName$.setEstado="B";
-		getSession().update($Table0.loObjName$);
+	public void delete($Table0.objName$ $Table0.loObjName$){
+		
 	}
 	
 	/**
@@ -146,7 +143,8 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public void insert($Table0.objName$ $Table0.loObjName$){
-		getSession().save($Table0.loObjName$);		
+	public $Table0.objName$ insert($Table0.objName$ $Table0.loObjName$){
+		getSession().save($Table0.loObjName$);	
+		return $Table0.loObjName$;
 	}
 }

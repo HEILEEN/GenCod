@@ -7,15 +7,15 @@ import com.confianza.webapp.repository.$AppName$.$Table0.loObjName$.$Table0.objN
 
 public interface $Table0.objName$Service{
 	
-	public $Table0.objName$ list(Long id);
+	public String list(Long id);
 	
-	public List<$Table0.objName$> listAll(int pageSize, int page);	
+	public String listAll(int pageSize, int page);	
 	
-	public $Table0.objName$ update(Long id);
+	public String insert($Table0.objName$ $Table0.loObjName$);
 	
-	public void delete(Long id);
+	public String update($Table0.objName$ $Table0.loObjName$);
 	
-	public $Table0.objName$ insert($Table0.objName$ $Table0.loObjName$);
+	public void delete($Table0.objName$ $Table0.loObjName$);	
 	
 	public int getCount();
 	

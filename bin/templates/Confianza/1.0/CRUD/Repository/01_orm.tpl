@@ -51,6 +51,10 @@ $Columns0:{ c |
 		return new String[]{ $Columns0:{c|"$c.name$"}; separator=", "$ };
 	}		
 	
+	static public String getColumnNames(){
+		return " $Columns0:{ c| $c.name$}; separator=", "$ ";
+	}
+	
 	public String toString(){
 		return $Columns0:{ c | " $c.name$: "+ this.$c.loName$ }; separator="\n\t\t\t+"$;
 	}

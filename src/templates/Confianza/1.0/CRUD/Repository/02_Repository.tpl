@@ -10,11 +10,11 @@ public interface $Table0.objName$Repository {
 	
 	public List<$Table0.objName$> listAll(int init, int limit);	
 	
-	public $Table0.objName$ update(Long id);
+	public $Table0.objName$ update($Table0.objName$ $Table0.loObjName$);
 	
-	public void delete(Long id);
+	public void delete($Table0.objName$ $Table0.loObjName$);
 	
-	public void insert($Table0.objName$ $Table0.loObjName$);
+	public $Table0.objName$ insert($Table0.objName$ $Table0.loObjName$);
 	
 	public int getCount();
 }
