@@ -52,8 +52,8 @@ public class $Table0.objName$ServiceImpl implements $Table0.objName$Service{
 	@RolesAllowed({"ADMINISTRATOR_ADMINISTRATOR", "APP_$Table0.permission$__ALL", "APP_$Table0.permission$__READ"})
 	public String listAll(int pageSize, int page){
 	
-		int limit=pageSize*page;
-		int init=limit-pageSize;
+		int limit=pageSize;
+		int init=(pageSize*page)-(pageSize);
 		
 		List<$Table0.objName$> listAll=$Table0.loObjName$Repository.listAll(init, limit);
 		

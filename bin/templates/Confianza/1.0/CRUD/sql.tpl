@@ -1,47 +1,43 @@
-/*
- * REGISTRO DEL MODULO
- */ 
-INSERT INTO bas_modulo 
-	(MODUNOMB, MODUNEMO, MODUTITL, MODUICON, MODUURI, MODUAPPS, MODUESTA, MODUCLJS)VALUES
-	('$Table0.objName$', '$Table0.objName$', 'App $Table0.objName$', '/rc/img/app.png', 
-	 'app/$AppName$/$Table0.loObjName$/$Table0.objName$.jsp', '<APPLICATION>', 'A', null);	
+DECLARE 
+   Consecutivomodulo Number;
+   Consecutivomodulorope Number;
+   Consecutivoi18n Number;
+   ConsecutivoAplicacion Number;
+   
+    --obtener el codigo que se usara en una tabla, inmediatamente se incrementa en 1 para el siguiente uso
+    Function getPk(sbPkId in varchar2) return number is
+            NUPKID number;
+    BEGIN
+            UPDATE FRM_PKID SET PKIDVALU = PKIDVALU WHERE PKIDNOMB = sbpkid;                        
+            SELECT PKIDVALU INTO NUPKID FROM FRM_PKID WHERE PKIDNOMB = sbpkid;
+            UPDATE FRM_PKID SET PKIDVALU = PKIDVALU + 1 WHERE PKIDNOMB = sbpkid;            
+            RETURN NUPKID;
+    END; 
+  
+Begin
 
-/*
- * PERMISOS PARA EL MODULO
- */
-INSERT INTO bas_modurope
-	(MOROROPE, MOROMODU) VALUES	('ALL', '$Table0.objName$');
+	--Cambie el codigo de la aplicacion 
+	ConsecutivoAplicacion := 1;
 	
-INSERT INTO bas_modurope
-	(MOROROPE, MOROMODU) VALUES	('CREATE', '$Table0.objName$');
-	
-INSERT INTO bas_modurope
-	(MOROROPE, MOROMODU) VALUES	('READ', '$Table0.objName$');
-	
-INSERT INTO bas_modurope
-	(MOROROPE, MOROMODU) VALUES	('DELETE', '$Table0.objName$');
-	
-INSERT INTO bas_modurope
-	(MOROROPE, MOROMODU) VALUES	('UPDATE', '$Table0.objName$');
-
-/*
- * REGISTRO EN EL ARBOL
- */
-INSERT INTO bas_arbol
-    (ARBOCODI, ARBOPADR, ARBONAME, ARBOICON, ARBOMODU, ARBOPOS, ARBOESTA)
-    VALUES
-    (-1, 0, '$Table0.objName$', null, '$Table0.objName$', 0, 'A' );
-	
--- Para llave primaria autogenerada
---INSERT INTO <PREFIJO_TABLA>_pkid
---	(PKID, PKIDVALU) VALUES	('$Table0.tableName$_PK', 0);
-
-
--- Soporte multi lenguaje
-INSERT INTO bas_i18n (I18NMODU, I18NCAMP, I18NTEXT)VALUES('$Table0.objName$', '-', 'i18n_$Table0.objName$');
-
-$Columns0:{c|INSERT INTO bas_i18n (I18NMODU, I18NCAMP, I18NTEXT)VALUES('$Table0.objName$', '$c.upName$', 'i18n_$c.upName$'); }; separator="\n"$
-
--- soporte Clases para Hibernate
-INSERT INTO bas_class (CLASCODI, CLASNAME)VALUES('$Table0.objName$', 'model.$AppName$.$Table0.loObjName$.$Table0.objName$');
-INSERT INTO bas_conxclas (COCLCONX, COCLCLAS)VALUES('$ConnName$', '$Table0.objName$');
+    --this part insert the modulo
+    Consecutivomodulo := getPk('FRM_MODULO_PK');
+    Insert Into Frm_Modulo (Moducons, Moduapli, Modunomb, Modunemo, Modudurl)Values (Consecutivomodulo, ConsecutivoAplicacion, '$Table0.tableName$', '$Table0.objName$', '$Table0.objName$');	
+    
+    --This part insert into modurope the roles that can execute the accion or service
+    Consecutivomodulorope := getPk('FRM_MODUROPE_PK');--ALL                       
+    Insert Into Frm_Modurope (Morocons, Moromodu, Mororope)Values (Consecutivomodulorope, Consecutivomodulo, 1);	                       
+    Consecutivomodulorope := getPk('FRM_MODUROPE_PK');--CREATE                       
+    Insert Into Frm_Modurope (Morocons, Moromodu, Mororope)Values (Consecutivomodulorope, Consecutivomodulo, 2);	                                                
+    Consecutivomodulorope := getPk('FRM_MODUROPE_PK'); --DELETE                      
+    Insert Into Frm_Modurope (Morocons, Moromodu, Mororope)Values (Consecutivomodulorope, Consecutivomodulo, 3); 
+    Consecutivomodulorope := getPk('FRM_MODUROPE_PK');--READ                       
+    Insert Into Frm_Modurope (Morocons, Moromodu, Mororope)Values (Consecutivomodulorope, Consecutivomodulo, 4);                              
+    Consecutivomodulorope := getPk('FRM_MODUROPE_PK');--UPDATE                       
+    Insert Into Frm_Modurope (Morocons, Moromodu, Mororope)Values (Consecutivomodulorope, Consecutivomodulo, 6);   
+                             
+    --this part insert the i18n for the forms in the front end
+    Consecutivomodulorope := getPk('FRM_I18N_PK');
+    Insert Into FRM_I18N (ETINCONS,ETINMODU,ETINCAMP,ETINETIQ) VALUES (Consecutivomodulorope,Consecutivomodulo,'-','$Object0$');
+    $Columns0:{c|Consecutivomodulorope := getPk('FRM_I18N_PK'); INSERT INTO FRM_I18N (ETINCONS, ETINMODU, ETINCAMP, ETINETIQ)VALUES(Consecutivomodulorope, '$c.loName$', 'i18n_$c.loName$'); }; separator="\n"$
+END;
+/

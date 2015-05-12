@@ -48,7 +48,7 @@ $Columns0:{ c |
 
 
 	static public String[] getNames(){
-		return new String[]{ $Columns0:{c|"$c.name$"}; separator=", "$ };
+		return new String[]{ $Columns0:{c|"$c.loName$"}; separator=", "$ };
 	}		
 	
 	static public String getColumnNames(){

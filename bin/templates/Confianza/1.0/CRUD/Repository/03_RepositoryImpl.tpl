@@ -41,7 +41,7 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	public $Table0.objName$ list(Long id){
 		try{
 			String sql = "select "+$Table0.objName$.getColumnNames()
-					   + "from $Table0.objName$ "
+					   + "from $Table0.tableName$ "
 					   + "where $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$ = :id ";
 						
 			Query query = getSession().createSQLQuery(sql)
@@ -64,7 +64,7 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	public List<$Table0.objName$> listAll(int init, int limit){
 		try{
 			String sql = "select "+$Table0.objName$.getColumnNames()
-					   + "from $Table0.objName$ ";
+					   + "from $Table0.tableName$ ";
 						
 			Query query = getSession().createSQLQuery(sql)
 						 .addEntity($Table0.objName$.class);
