@@ -12,11 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.confianza.webapp.utils.SqlFunctions;
+import com.confianza.webapp.utils.Filter;
+
 @Repository
 public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repository{
 	
 	@Autowired
 	private SessionFactory sessionFactory;  	
+	
+	@Autowired
+	private SqlFunctions sqlFunctions;
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -61,15 +67,19 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public List<$Table0.objName$> listAll(int init, int limit){
+	public List<$Table0.objName$> listAll(int init, int limit, String order, List<Filter> filters){
 		try{
 			String sql = "select "+$Table0.objName$.getColumnNames()
 					   + "from $Table0.tableName$ ";
+				
+			sql = sqlFunctions.completeSQL(order, filters, sql, $Table0.objName$.getColumnNames());
 						
 			Query query = getSession().createSQLQuery(sql)
 						 .addEntity($Table0.objName$.class);
+				
+			query=sqlFunctions.setParameters(filters, query);
 						 
-			if(init==0 && limit!=0){
+			if(limit!=0){
 				query.setFirstResult(init);			
 				query.setMaxResults(limit);
 			}
@@ -88,12 +98,16 @@ public class $Table0.objName$RepositoryImpl implements $Table0.objName$Repositor
 	 */
 	@Override
 	@Transactional
-	public int getCount(){
+	public int getCount(List<Filter> filters){
 		try{
 			String sql = "select count(*) "
 					   + "from $Table0.objName$ ";
+				
+			sql = sqlFunctions.completeSQL(null, filters, sql, $Table0.objName$.getColumnNames());
 						
 			Query query = getSession().createQuery(sql);
+	        
+	        query=sqlFunctions.setParameters(filters, query);
 	        
 			Iterator it = query.list().iterator();
 	        Long ret = new Long(0);

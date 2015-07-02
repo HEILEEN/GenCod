@@ -40,11 +40,11 @@ public class C$Table0.objName$ {
 		return this.$Table0.loObjName$Service.list($Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$);
 	}
 	
-	@RequestMapping(value = "/listAll.json", params = {"page","pageSize"},  method = RequestMethod.GET, produces={"application/json"})
+	@RequestMapping(value = "/listAll.json",  method = RequestMethod.GET, produces={"application/json"})
 	@ResponseBody
-	public String listAll(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page){
+	public String listAll(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page, @RequestParam("order") String order, @RequestParam(value ="filter", required=false) String filters){
 	
-		return this.$Table0.loObjName$Service.listAll(pageSize, page);
+		return this.$Table0.loObjName$Service.listAll(pageSize, page, order, filters);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST, produces={"application/json"})

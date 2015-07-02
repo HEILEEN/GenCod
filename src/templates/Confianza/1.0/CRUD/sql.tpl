@@ -38,6 +38,6 @@ Begin
     --this part insert the i18n for the forms in the front end
     Consecutivomodulorope := getPk('FRM_I18N_PK');
     Insert Into FRM_I18N (ETINCONS,ETINMODU,ETINCAMP,ETINETIQ) VALUES (Consecutivomodulorope,Consecutivomodulo,'-','$Object0$');
-    $Columns0:{c|Consecutivomodulorope := getPk('FRM_I18N_PK'); INSERT INTO FRM_I18N (ETINCONS, ETINMODU, ETINCAMP, ETINETIQ)VALUES(Consecutivomodulorope, '$c.loName$', 'i18n_$c.loName$'); }; separator="\n"$
+    $Columns0:{c|Consecutivomodulorope := getPk('FRM_I18N_PK'); INSERT INTO FRM_I18N (ETINCONS, ETINMODU, ETINCAMP, ETINETIQ)VALUES(Consecutivomodulorope, Consecutivomodulo, '$c.loName$', 'i18n_$c.loName$'); }; separator="\n"$
 END;
 /

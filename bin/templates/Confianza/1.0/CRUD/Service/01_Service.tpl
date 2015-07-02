@@ -9,7 +9,7 @@ public interface $Table0.objName$Service{
 	
 	public String list(Long id);
 	
-	public String listAll(int pageSize, int page);	
+	public String listAll(int pageSize, int page, String order, String stringFilters);	
 	
 	public String insert($Table0.objName$ $Table0.loObjName$);
 	
@@ -17,6 +17,6 @@ public interface $Table0.objName$Service{
 	
 	public void delete($Table0.objName$ $Table0.loObjName$);	
 	
-	public int getCount();
+	public int getCount(List<Filter> filters);
 	
 }

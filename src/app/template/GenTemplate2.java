@@ -77,6 +77,7 @@ public class GenTemplate2 {
 		(new File(dTmp + dOut + dSeparator + "Repository")).mkdir();
 		(new File(dTmp + dOut + dSeparator + "Controller")).mkdir();
 		(new File(dTmp + dOut + dSeparator + "Service")).mkdir();
+		(new File(dTmp + dOut + dSeparator + "Angular")).mkdir();
 		
 		for(String table: tables)
 		{	

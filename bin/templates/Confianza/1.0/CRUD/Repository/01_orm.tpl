@@ -52,7 +52,7 @@ $Columns0:{ c |
 	}		
 	
 	static public String getColumnNames(){
-		return " $Columns0:{ c| $c.name$}; separator=", "$ ";
+		return " $Columns0:{ c| $c.loName$}; separator=", "$ ";
 	}
 	
 	public String toString(){

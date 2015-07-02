@@ -30,6 +30,7 @@ public class JavaType {
 	}
 	
 	public String getOrmType(){
+		
 		if(getInteger()){
 			return "Integer";
 		}else if(getString()){
@@ -64,8 +65,7 @@ public class JavaType {
 	}
 	
 	public boolean getLong(){
-		return (scale == 0 && 
-	           (type == "java.lang.Double" || 
+		return ((type == "java.lang.Double" || 
 			    type == "java.math.BigDecimal")) ||
 				type == "java.lang.Long";
 	}
