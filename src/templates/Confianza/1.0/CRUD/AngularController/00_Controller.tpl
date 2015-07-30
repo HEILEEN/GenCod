@@ -12,8 +12,7 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
         	 	
         	 	Service.setI18n(dataResponse.data);
         	 	
-	        	columns=[ $Columns0:{ c | { field: "$c.loName$", displayName: getName(Service.getI18n(), "$c.loName$", "$Table0.tableName$"), visible: true } }; separator=",\n"$ 
-	                 ];
+	        	columns=[ $Columns0:{ c | { field: "$c.loName$", displayName: getName(Service.getI18n(), "$c.loName$", "$Table0.tableName$"), visible: true } }; separator=";\n"$];
 	            
 	            \$scope.columnDefs=columns;
 	            
@@ -61,7 +60,7 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 			\$scope.buttonEdit=false;
 			\$scope.buttonDelete=false;
 			
-			$Columns0:{ c| \$scope.$c.loName$ = "" }; separator=",\n "$        	
+			$Columns0:{ c| \$scope.$c.loName$ = ""; }; separator="\n"$        	
         }                
         
 		\$scope.loadDatatoForm= function(){			
@@ -71,8 +70,10 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 				\$scope.buttonEdit=true;
 				\$scope.buttonDelete=false;					        	
 			}
-			else
-				alert("Favor seleccione una fila");
+			else{
+				\$scope.sendAlert("Favor seleccione una fila");
+				\$('#myModalNew').modal('hide');		
+			}	
         }                       
 		
 		\$scope.deleteRecordForm= function(){
@@ -82,46 +83,66 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 				\$scope.buttonEdit=false;
 				\$scope.buttonDelete=true;					        	
 			}
-			else
-				alert("Favor seleccione una fila");
+			else{
+				\$scope.sendAlert("Favor seleccione una fila");
+				\$('#myModalNew').modal('hide');		
+			}			
         }
 		
 		\$scope.insertRecord= function(){
 			
-			Service.insertRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) {        	            
-				row=dataResponse.data;
-				
-				$Columns0:{ c| \$scope.$c.loName$ = row.$c.loName$ }; separator=",\n "$     
-								
-	        	alert("Se creo el registro correctamente");
-	        	
-	        	\$scope.loadMyGrid();
-	        }); 
+			if($scope.validateData())	
+				Service.insertRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) {    
+					if(dataResponse.data.error!=undefined)
+						$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+			    	else{    	            
+						row=dataResponse.data;
+						
+						$Columns0:{ c| \$scope.$c.loName$ = row.$c.loName$; }; separator="\n"$     
+							
+						\$scope.sendAlert("Se creo el registro correctamente");		
+			        	\$('#myModalNew').modal('hide');
+			        	\$scope.loadMyGrid();
+			        }
+		        }); 
+		    else
+				$scope.sendAlert("Faltan datos por diligenciar");    
         }
 		
 		\$scope.updateRecord= function(){
 			
-			Service.updateRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) {        	            
-				row=dataResponse.data;
-				
-				$Columns0:{ c| \$scope.$c.loName$ = row.$c.loName$ }; separator=",\n "$
-									        
-	        	alert("Se actualizo el registro correctamente");
-	        	
-	        	\$scope.loadMyGrid();
-	        }); 
+			if($scope.validateData())	
+				Service.updateRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) { 
+					if(dataResponse.data.error!=undefined)
+						$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+			    	else{       	            
+						row=dataResponse.data;
+						
+						$Columns0:{ c| \$scope.$c.loName$ = row.$c.loName$; }; separator="\n"$
+						
+						\$scope.sendAlert("Se actualizo el registro correctamente");
+						\$('#myModalNew').modal('hide');
+			        	\$scope.loadMyGrid();
+			        }
+		        });
+		    else
+				$scope.sendAlert("Faltan datos por diligenciar");     
         }
 		
 		\$scope.deleteRecord= function(){
 						
-			Service.deleteRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) {        	            
-				row=dataResponse.data;
-				
-				$Columns0:{ c| \$scope.$c.loName$ = row.$c.loName$ }; separator=",\n "$
-
-	        	alert("Se borro el registro correctamente");
-	        	
-	        	\$scope.loadMyGrid();
+			Service.deleteRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) { 
+				if(dataResponse.data.error!=undefined)
+					$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+			    else{         	            
+					row=dataResponse.data;
+					
+					$Columns0:{ c| \$scope.$c.loName$ = row.$c.loName$; }; separator="\n"$
+	
+					\$scope.sendAlert("Se borro el registro correctamente");
+					\$('#myModalNew').modal('hide');
+		        	\$scope.loadMyGrid();
+		        }
 	        }); 
         }
         
@@ -130,6 +151,8 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 			\$scope.currentPage=currentPage;
 			\$scope.order=order;
 			\$scope.searchQuery=searchQuery;
+			if(\$scope.searchQuery==undefined)
+			\$scope.searchQuery=[];
 			
 	    	if(\$scope.directiveGrid)
 	    		\$scope.loadMyGrid();
@@ -139,10 +162,24 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 			
 			Service.getData(\$scope.pageSize, \$scope.currentPage, \$scope.order, \$scope.searchQuery.concat(\$scope.basicSearchQuery)).then(function(dataResponse) {
 	    		if(dataResponse.data.error!=undefined)
-	    			alert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+	    			\$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
 	        	else 
 	        		\$scope.\$broadcast('loadDataGrid',dataResponse.data.data, dataResponse.data.count, \$scope.pageSize, \$scope.currentPage);
 	        });
+		}
+		
+		\$scope.sendAlert = function(error){
+			\$scope.\$broadcast('loadDataError', error);
+		}
+		
+		\$scope.validateData= function(){			
+			
+			if(!formInsert.$valid)
+				return false;
+			$Columns0:{ c| else if(\$scope.$c.loName$==undefined || \$scope.$c.loName$.trim()=='')
+				return false;}; separator="\n"$	
+						
+			return true;
 		}				
     }            
     ])

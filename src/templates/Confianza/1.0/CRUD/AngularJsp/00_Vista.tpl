@@ -29,35 +29,35 @@
 					<div class="form-group">
 						<label for="$c.loName$" class="col-sm-2 control-label">{{ whatClassIsIt("$c.loName$") }}</label>
 						<div class="col-sm-10">
-							<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" value="{{$c.loName$}}" ng-pattern="/^(0|\-?[1-9][0-9]*)\$/" ng-required="true">
+							<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" value="{{$c.loName$}}" ng-pattern="/^(0|\-?[1-9][0-9]*)\$/" ng-required="true" readonly="true">
 						</div>
 					</div>							
 				$elseif(c.type.long)$
 					<div class="form-group">
 						<label for="$c.loName$" class="col-sm-2 control-label">{{ whatClassIsIt("$c.loName$") }}</label>
 						<div class="col-sm-10">
-							<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" value="{{$c.loName$}}" ng-pattern="/^(0|\-?[1-9][0-9]*)\$/" ng-required="true">
+							<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" value="{{$c.loName$}}" ng-pattern="/^(0|\-?[1-9][0-9]*)\$/" ng-required="true" data-ng-readonly="buttonDelete">
 						</div>
 					</div>
 				$elseif(c.type.double)$
 					<div class="form-group">
 						<label for="$c.loName$" class="col-sm-2 control-label">{{ whatClassIsIt("$c.loName$") }}</label>
 						<div class="col-sm-10">
-							<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" readonly="readonly" value="{{$c.loName$}}" ng-pattern="/^(0|\-?{0,9}\.\d{1,9})\$/" step="any" ng-required="column.pararequ" >
+							<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" readonly="readonly" value="{{$c.loName$}}" ng-pattern="/^(0|\-?{0,9}\.\d{1,9})\$/" step="any" ng-required="true" data-ng-readonly="buttonDelete">
 						</div>
 					</div>	
 				$elseif(c.type.date)$
 					<div class="form-group">
 						<label for="$c.loName$" class="col-sm-2 control-label">{{ whatClassIsIt("$c.loName$") }}</label>
 						<div class="col-sm-10">
-							<input style="width:100%;" type="text" datepicker-popup="dd/MM/yyyy" ng-model="$c.loName$" is-open="campoDate" ng-click="campoDate=true" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" ui-date ui-date-format="dd/MM/yyyy" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar"/>
+							<input style="width:100%;" type="text" datepicker-popup="dd/MM/yyyy" ng-model="$c.loName$" is-open="campoDate" ng-click="campoDate=true" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" ui-date ui-date-format="dd/MM/yyyy" close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" data-ng-readonly="buttonDelete"/>
 						</div>
 					</div>
 				$else$
 					<div class="form-group">
 						<label for="$c.loName$" class="col-sm-2 control-label">{{ whatClassIsIt("$c.loName$") }}</label>
 						<div class="col-sm-10">
-							<input style="width:100%;" type="text" name ="{{$c.loName$}}" id="{{$c.loName$}}" ng-model="$c.loName$" ng-required="true">
+							<input style="width:100%;" type="text" name ="{{$c.loName$}}" id="{{$c.loName$}}" ng-model="$c.loName$" ng-required="true" data-ng-readonly="buttonDelete">
 						</div>
 					</div>
 				$endif$
@@ -65,7 +65,7 @@
 				<div class="form-group">
 					<label for="$c.loName$" class="col-sm-2 control-label">{{ whatClassIsIt("$c.loName$") }}</label>
 					<div class="col-sm-10">
-						<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" readonly="readonly" value="{{$c.loName$}}">
+						<input type="number" name ="$c.loName$" id="$c.loName$" style="width:100%;" ng-model="$c.loName$" readonly="readonly" value="{{$c.loName$}}" data-ng-readonly="buttonDelete">
 					</div>
 				</div>							
 			$endif$ 
@@ -79,7 +79,9 @@
 		        <button type="button" class="btn btn-danger" ng-click="deleteRecord()" ng-show="buttonDelete">Borrar <span class="glyphicon glyphicon-trash"> </span></button>
 		      </div>
 		    </div>
-		  </div>
-		</div>								
+		  </div>		  			
+		</div>
+		
+		<custom-alert labelerror="Ninguno"></custom-alert>									
       </div>          	    	        
 </sec:authorize>  

@@ -33,21 +33,21 @@ public class C$Table0.objName$ {
 		return "$AppName$/$Table0.loObjName$/$Table0.objName$";
 	}
 	
-	@RequestMapping(value = "/{$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$}.json", method = RequestMethod.GET, produces={"application/json"})
+	@RequestMapping(value = "/{$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$}.json", method = RequestMethod.GET, produces={"application/json; charset=ISO-8859-1"})
 	@ResponseBody
 	public String list(@PathVariable("$Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$") Long $Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$){
 		
 		return this.$Table0.loObjName$Service.list($Columns0:{ c |	$if(!Table0.nPk)$$if(c.Pk)$$c.loName$$endif$$endif$};separator=""$);
 	}
 	
-	@RequestMapping(value = "/listAll.json",  method = RequestMethod.GET, produces={"application/json"})
+	@RequestMapping(value = "/listAll.json",  method = RequestMethod.GET, produces={"application/json; charset=ISO-8859-1"})
 	@ResponseBody
 	public String listAll(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page, @RequestParam("order") String order, @RequestParam(value ="filter", required=false) String filters){
 	
 		return this.$Table0.loObjName$Service.listAll(pageSize, page, order, filters);
 	}
 	
-	@RequestMapping(value = "/update", method = RequestMethod.POST, produces={"application/json"})
+	@RequestMapping(value = "/update", method = RequestMethod.POST, produces={"application/json; charset=ISO-8859-1"})
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	public String update(@RequestBody $Table0.ObjName$ $Table0.loObjName$, HttpServletRequest request){
@@ -55,7 +55,7 @@ public class C$Table0.objName$ {
 		return this.$Table0.loObjName$Service.update($Table0.loObjName$);
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces={"application/json"})
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces={"application/json; charset=ISO-8859-1"})
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	public String delete(@RequestBody $Table0.ObjName$ $Table0.loObjName$, HttpServletRequest request){
@@ -64,7 +64,7 @@ public class C$Table0.objName$ {
 		return this.$Table0.loObjName$Service.update($Table0.loObjName$);
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces={"application/json"})
+	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces={"application/json; charset=ISO-8859-1"})
 	@ResponseStatus( HttpStatus.CREATED )
 	@ResponseBody
 	public String insert(@RequestBody $Table0.objName$ $Table0.loObjName$, HttpServletRequest request){
