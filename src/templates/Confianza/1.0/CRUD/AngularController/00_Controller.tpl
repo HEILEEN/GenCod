@@ -91,10 +91,10 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 		
 		\$scope.insertRecord= function(){
 			
-			if($scope.validateData())	
+			if(\$scope.validateData())	
 				Service.insertRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) {    
 					if(dataResponse.data.error!=undefined)
-						$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+						\$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
 			    	else{    	            
 						row=dataResponse.data;
 						
@@ -106,15 +106,15 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 			        }
 		        }); 
 		    else
-				$scope.sendAlert("Faltan datos por diligenciar");    
+				\$scope.sendAlert("Faltan datos por diligenciar");    
         }
 		
 		\$scope.updateRecord= function(){
 			
-			if($scope.validateData())	
+			if(\$scope.validateData())	
 				Service.updateRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) { 
 					if(dataResponse.data.error!=undefined)
-						$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+						\$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
 			    	else{       	            
 						row=dataResponse.data;
 						
@@ -126,14 +126,14 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 			        }
 		        });
 		    else
-				$scope.sendAlert("Faltan datos por diligenciar");     
+				\$scope.sendAlert("Faltan datos por diligenciar");     
         }
 		
 		\$scope.deleteRecord= function(){
 						
 			Service.deleteRecord($Columns0:{ c| \$scope.$c.loName$}; separator=","$).then(function(dataResponse) { 
 				if(dataResponse.data.error!=undefined)
-					$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
+					\$scope.sendAlert(dataResponse.data.tituloError+': '+dataResponse.data.error);
 			    else{         	            
 					row=dataResponse.data;
 					
@@ -174,7 +174,7 @@ FrmMainApp.controller('$Table0.objName$Controller', ['\$scope', '$Table0.objName
 		
 		\$scope.validateData= function(){			
 			
-			if(!formInsert.$valid)
+			if(!formInsert.\$valid)
 				return false;
 			$Columns0:{ c| else if(\$scope.$c.loName$==undefined || \$scope.$c.loName$.trim()=='')
 				return false;}; separator="\n"$	
