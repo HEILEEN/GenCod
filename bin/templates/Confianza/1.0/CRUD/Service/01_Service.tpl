@@ -3,6 +3,7 @@ package com.confianza.webapp.service.$AppName$.$Table0.loObjName$;
 $comments$
 
 import java.util.List;
+import com.confianza.webapp.utils.Filter;
 import com.confianza.webapp.repository.$AppName$.$Table0.loObjName$.$Table0.objName$;
 
 public interface $Table0.objName$Service{

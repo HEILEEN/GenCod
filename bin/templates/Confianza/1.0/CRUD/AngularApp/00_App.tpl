@@ -1,0 +1,1 @@
+var $Table0.objName$App = angular.module('$Table0.objName$', ['ngGrid']);
